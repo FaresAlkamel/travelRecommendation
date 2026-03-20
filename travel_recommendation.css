@@ -83,7 +83,7 @@ header{
     border-style: none;
     outline: none;
 }
-#searchInput::placeholder{
+#search-input::placeholder{
     color:#006A7D;
 }
 
