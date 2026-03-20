@@ -1,0 +1,245 @@
+body{
+    display:flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    
+}
+
+#hero {
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    min-height: calc(100vh - 60px);
+    background-image: url('./imgs/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    gap:300px;
+}
+#hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to right,
+        rgba(0, 80, 80, 0.8) 0%,
+        rgba(0, 80, 80, 0.6) 30%,
+        rgba(0, 80, 80, 0.3) 50%,
+        rgba(0, 80, 80, 0) 70%
+    );
+}
+
+.bttn{
+    background-color: #006A7D;
+    color:white;
+    border-radius: 10px;
+    cursor: pointer;
+    border-style: none;
+}
+
+
+/******************************header***************************************/
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height:60px;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+}
+
+.header-bars{
+    display: flex;
+    flex-direction: row;
+    gap:15px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color:white;
+}
+
+
+.navHAC{
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+
+#search-bar{
+    background-color: rgb(255, 255, 255);
+    width: fit-content;
+    border-radius: 20px;
+    margin-left: 0;
+    width:30%;
+    height: 70%;
+    margin:10px;
+}
+
+#search-input{
+    width: 50%;
+    height: 85%;
+    border-style: none;
+    outline: none;
+}
+#searchInput::placeholder{
+    color:#006A7D;
+}
+
+#search-icon{
+    height: 20px;
+    width: 20px;
+}
+.serach-bttn{
+    width: 80px;
+    height: 30px;
+}
+/****************************end-header*************************************/
+
+/****************************social*****************************************/
+
+#socil-media {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    left:50px;
+    padding-top: 150px;
+    gap: 10px;
+}
+
+.socil-icon{
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.line {
+  margin-left: 20px;
+  margin-bottom: 50px;
+  width: 2px;
+  height: 250px;
+  background-color: white;
+}
+
+
+
+
+
+/**************************end-social***************************************/
+
+/*******************************body-of-home********************************/
+
+.home-CSS{
+    position: relative;
+    z-index: 2;
+    color:white;
+    padding-top: 80px;
+}
+#content h1{
+    font-size: 80px;
+}
+#content p{
+    font-size: 20px;
+}
+#bookbttn{
+    width: 150px;
+    height: 40px;
+}
+/*****************************end-body-of-home******************************/
+
+/*******************************body-of-About*******************************/
+.about-CSS{
+    position: relative;
+    z-index: 2;
+    color:white;
+    padding-top: 80px;
+}
+.info{
+    background-color: rgba(0, 0, 0, 0.3);
+    padding:20px;
+    
+}
+
+#team{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+}
+
+#team h2{
+    font-size:80px;
+}
+
+.team-bttn{
+    width:80px;
+    height: 25px;
+}
+
+.history{
+    background-color: rgba(0, 0, 0, 0.3);
+    padding:20px;
+    margin-bottom: 20px;
+}
+
+#loction{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+/*****************************end-body-of-About****************************/
+
+/*******************************body-of-Contact****************************/
+.contact-CSS{
+    position: relative;
+    z-index: 2;
+    color:white;
+    padding-top: 300px;
+    width: 80%;
+}
+.contact-CSS h2{
+    font-size:80px;
+    
+}
+#contact-fileds{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:500px;
+    gap:20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color:white;
+}
+
+.form-inputs{
+    height:40px;
+    border-radius: 10px;
+    border-color: white;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.form-inputs::placeholder{
+    color:rgba(255, 255, 255, 0.6);
+}
+.message-input{
+    height:400px;
+}
+.message-input::placeholder{
+    
+    color:rgba(255, 255, 255, 0.6);
+}
+#submit-bttn{
+    height: 70px;
+}
+/*****************************end-body-of-Contact**************************/
