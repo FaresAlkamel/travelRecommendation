@@ -13,7 +13,7 @@ const homeContact = `
         <button class="bttn" id="bookbttn">Book Now</button> `;
 
 const content = hero.querySelector('#content');
-content.innerHTML=homeContact;
+// content.innerHTML=homeContact;
 
 const aboutUsContact=`
         <div>
@@ -109,3 +109,4 @@ function searchResult(){
                 })
 }
 searchBttn.addEventListener('click',searchResult);
+
