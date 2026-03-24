@@ -13,7 +13,7 @@ const homeContact = `
         <button class="bttn" id="bookbttn">Book Now</button> `;
 
 const content = hero.querySelector('#content');
-// content.innerHTML=homeContact;
+content.innerHTML=homeContact;
 
 const aboutUsContact=`
         <div>
@@ -71,7 +71,7 @@ const contactUsContact=`
                     <input type="text" class="form-inputs" id="email" placeholder="Enter your email">
                     <label for="message">Message</label>
                     <textarea class="form-inputs message-input" id="message" placeholder="Enter your message"></textarea>
-                    <button class="bttn" id="submit-bttn">Submit</button>
+                    <button class="bttn" onclick=alertFunc() id="submit-bttn">Submit</button>
                 </div>
             </div>`;
 
@@ -84,29 +84,125 @@ home.addEventListener("click",()=>changeContent (homeContact,'home-CSS') );
 aboutUs.addEventListener("click",()=>changeContent (aboutUsContact,'about-CSS') );
 contactUs.addEventListener("click",()=>changeContent (contactUsContact,'contact-CSS') );
 
+const alertFunc = () => {
+                            const nameInput = document.getElementById('name');
+                            const emailInput = document.getElementById('email');
+                            const messageInput = document.getElementById('message');
 
+                            const name = nameInput.value;
+                            const email = emailInput.value;
+                            const message = messageInput.value;
+                            if(name !== '' && email !== '' && message !== '') {alert("thank u for ur feadBack")}
+                            nameInput.value='';
+                            emailInput.value='';
+                            messageInput.value='';
+                        }
+
+
+const searchContent= document.getElementById('search-content');
 const searchBttn = document.getElementById('serach');
+const clearBttn = document.getElementById('clear');
+let TimeContry = '';
 
-function interest (word){
+function displayResult(url ,header ,content){
+    
 
+    const div =document.createElement('div');
+    div.classList.add("n-contener");
+
+    const img =document.createElement('img');
+    img.classList.add('img-search');
+    img.src = url
+
+    const h2 = document.createElement('h2');
+    h2.innerText= header
+
+    const p = document.createElement('p');
+    p.innerText= content
+
+    const bttn =document.createElement('button');
+    bttn.classList.add('bttn','team-bttn');
+    bttn.innerText="visit";
+
+    div.append(img, h2, p, bttn);
+    searchContent.appendChild(div)
+}
+
+function displayTime(country) {
+    const div = document.createElement('div');
+    div.classList.add("time");
+
+    function updateTime() {
+        const now = new Date();
+
+        const time = now.toLocaleTimeString("en-US", {
+            timeZone: country,
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        });
+
+        div.innerHTML = `<h2>Current Local Time (${country}): ${time}</h2>`;
+    }
+
+    updateTime(); 
+    setInterval(updateTime, 1000);
+
+    searchContent.prepend(div);
 }
 
 function searchResult(){
-    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    
     fetch('travel_recommendation_api.json')
                 .then(response => response.json())
                 .then(data =>{
-                    const countryResult=[];
-                    data.countries.forEach(country => {
-                        const name = country.name.toLowerCase();
-                        const hasCity = country.cities.some(city => city.name.toLowerCase().includes(searchInput));
-                        if (name.includes(searchInput) || hasCity){
-                            countryResult.push(country.id);
-                        }
-                    });
-
+                    const searchInput = document.getElementById('search-input').value.toLowerCase();
                     
+                    data.countries.forEach(country => {
+                        country.cities.forEach((element)=>{//this work for country/city seraches
+                            const name = element.name.toLowerCase();
+                            if(name.includes(searchInput)){
+                                const cityName = element.name;
+                                const cityImg = element.imageUrl;
+                                const citydescription = element.description;
+
+                                TimeContry = element.timeZone;
+
+                                displayResult(cityImg ,cityName ,citydescription);
+                            }
+                        });
+                    });
+                    
+                    data.temples.forEach( temple =>{
+                        const seatchIntent ="temples"
+                        if (seatchIntent.includes(searchInput)){// if u type for ex 'le' still the condation will be true 
+                            
+                            const cityName = temple.name;
+                            const cityImg = temple.imageUrl;
+                            const citydescription = temple.description;
+                            displayResult(cityImg ,cityName ,citydescription);
+                        }
+                    })
+
+                    data.beaches.forEach( beach => {
+                        const seatchIntent ="beaches"
+                        if (seatchIntent.includes(searchInput)){// if u type for ex 'be' still the condation will be true 
+                            
+                            const cityName = beach.name;
+                            const cityImg = beach.imageUrl;
+                            const citydescription = beach.description;
+                            displayResult(cityImg ,cityName ,citydescription);
+                        }
+                    })
+
+                    displayTime(TimeContry);
                 })
 }
+
+function clear(){ 
+    searchContent.innerHTML='';
+}
 searchBttn.addEventListener('click',searchResult);
+clearBttn.addEventListener('click',clear);
 
