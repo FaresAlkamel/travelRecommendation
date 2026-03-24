@@ -83,3 +83,29 @@ function changeContent (html,className){
 home.addEventListener("click",()=>changeContent (homeContact,'home-CSS') );
 aboutUs.addEventListener("click",()=>changeContent (aboutUsContact,'about-CSS') );
 contactUs.addEventListener("click",()=>changeContent (contactUsContact,'contact-CSS') );
+
+
+const searchBttn = document.getElementById('serach');
+
+function interest (word){
+
+}
+
+function searchResult(){
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    fetch('travel_recommendation_api.json')
+                .then(response => response.json())
+                .then(data =>{
+                    const countryResult=[];
+                    data.countries.forEach(country => {
+                        const name = country.name.toLowerCase();
+                        const hasCity = country.cities.some(city => city.name.toLowerCase().includes(searchInput));
+                        if (name.includes(searchInput) || hasCity){
+                            countryResult.push(country.id);
+                        }
+                    });
+
+                    
+                })
+}
+searchBttn.addEventListener('click',searchResult);
